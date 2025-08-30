@@ -25,6 +25,7 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxv5V4C5b5r9vYAKt_qB1Vzd1pwyJ8Mz4lY6XFaQ-VfiCMM_nCwmGESPav4tp57l5hT/exec"; // вставь свой URL
+    await fetch(API_URL + `?action=add&name=${encodeURIComponent(name)}&link=${encodeURIComponent(link)}&key=МОЙ_СЕКРЕТНЫЙ_КЛЮЧ`, { method: 'POST' });
 
     async function loadGifts() {
       const res = await fetch(API_URL);
@@ -62,4 +63,5 @@
   </script>
 </body>
 </html>
+
 
