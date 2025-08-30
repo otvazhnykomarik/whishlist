@@ -2,47 +2,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Wishlist</title>
-  <style>
-    body { font-family: sans-serif; max-width: 600px; margin: 30px auto; }
-    h1 { text-align: center; }
-    .gift { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
-    .gift a { text-decoration: none; color: #333; font-weight: bold; }
-    button { padding: 6px 10px; border: none; border-radius: 6px; background: #4CAF50; color: white; cursor: pointer; }
-    button[disabled] { background: #aaa; }
-  </style>
+  <title>Вишлист</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎁 Wishlist</h1>
-  <div id="wishlist"></div>
+  <h1>Вишлист</h1>
+  <ul id="wishlist"></ul>
 
+  <script src="script.js"></script>
   <script>
-    const API_URL = "ТВОЙ_URL_ОТ_GAS"; // вставь сюда URL из Google Apps Script
-
-    async function loadGifts() {
-      const res = await fetch(API_URL);
-      const gifts = await res.json();
-      const container = document.getElementById('wishlist');
-      container.innerHTML = '';
-      gifts.forEach(g => {
-        const div = document.createElement('div');
-        div.className = 'gift';
-        div.innerHTML = `
-          <a href="${g.link}" target="_blank">${g.name}</a>
-          <button ${g.booked === 'Да' ? 'disabled' : ''}>${g.booked === 'Да' ? 'Забронировано' : 'Забронировать'}</button>
-        `;
-        const btn = div.querySelector('button');
-        if (g.booked !== 'Да') {
-          btn.addEventListener('click', async () => {
-            await fetch(API_URL + '?action=book&name=' + encodeURIComponent(g.name), { method: 'POST' });
-            loadGifts();
-          });
-        }
-        container.appendChild(div);
-      });
-    }
-
-    loadGifts();
+    loadWishlist(); // Загружаем список
   </script>
 </body>
 </html>
