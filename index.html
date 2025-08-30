@@ -10,22 +10,14 @@
     .gift a { text-decoration: none; color: #333; font-weight: bold; }
     button { padding: 6px 10px; border: none; border-radius: 6px; background: #4CAF50; color: white; cursor: pointer; }
     button[disabled] { background: #aaa; }
-    form { display: flex; gap: 10px; margin-bottom: 20px; }
-    input { flex: 1; padding: 8px; }
   </style>
 </head>
 <body>
   <h1>🎁 Wishlist</h1>
-  <form id="addForm">
-    <input type="text" id="name" placeholder="Название" required>
-    <input type="url" id="link" placeholder="Ссылка" required>
-    <button type="submit">Добавить</button>
-  </form>
   <div id="wishlist"></div>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxv5V4C5b5r9vYAKt_qB1Vzd1pwyJ8Mz4lY6XFaQ-VfiCMM_nCwmGESPav4tp57l5hT/exec"; // вставь свой URL
-    await fetch(API_URL + `?action=add&name=${encodeURIComponent(name)}&link=${encodeURIComponent(link)}&key=МОЙ_СЕКРЕТНЫЙ_КЛЮЧ`, { method: 'POST' });
+    const API_URL = "ТВОЙ_URL_ОТ_GAS"; // вставь сюда URL из Google Apps Script
 
     async function loadGifts() {
       const res = await fetch(API_URL);
@@ -50,18 +42,7 @@
       });
     }
 
-    document.getElementById('addForm').addEventListener('submit', async e => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const link = document.getElementById('link').value;
-      await fetch(API_URL + `?action=add&name=${encodeURIComponent(name)}&link=${encodeURIComponent(link)}`, { method: 'POST' });
-      e.target.reset();
-      loadGifts();
-    });
-
     loadGifts();
   </script>
 </body>
 </html>
-
-
